@@ -1,0 +1,38 @@
+* Inspiration
+
+This project is inspired from DevOpsHobbies' Django CI CD Nexus Registry [[https://github.com/devopshobbies/django-ci-cd-NexusRegistry][Github repository.]]
+
+This is by no means not a detailed and in-depth tutorial.
+Take this as a set of notes to self.
+
+Thanks to the wonderful [[https://github.com/devopshobbies][DevOpsHobbies]] team for their inspiration.
+
+* Notes
+
+** Server hardening
+
+1. Make it harder for inruders to hack into your SSH environment!
+   
+2. Create backups! At least three, and one outside the server environment.
+   This is to minimize the harm taken if the server gets attacked.
+
+*** Make the SSH connection more secure
+
+**** Change the default port from 22
+
+**** Go for passwordless authentication
+
+#+BEGIN_SRC console
+  $ target_username="user"    # REPLACE with your server username
+  $ target_ip="192.168.43.10" # REPLACE with your server ip
+  $ ssh-copy-id ${target_username}@${target_ip}
+  /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+  /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+  user@192.168.43.10's password: 
+
+  Number of key(s) added: 1
+
+  Now try logging into the machine, with:   "ssh 'user@192.168.43.10'"
+  and check to make sure that only the key(s) you wanted were added.
+#+END_SRC
+
