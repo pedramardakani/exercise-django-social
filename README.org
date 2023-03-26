@@ -22,6 +22,8 @@ Thanks to the wonderful [[https://github.com/devopshobbies][DevOpsHobbies]] team
 
 **** Go for passwordless authentication
 
+Either use the following automatic method to append your public key to the =authorized_keys= file of the server:
+
 #+BEGIN_SRC console
   $ target_username="user"    # REPLACE with your server username
   $ target_ip="192.168.43.10" # REPLACE with your server ip
@@ -36,3 +38,16 @@ Thanks to the wonderful [[https://github.com/devopshobbies][DevOpsHobbies]] team
   and check to make sure that only the key(s) you wanted were added.
 #+END_SRC
 
+Or do it manully:
+
+#+BEGIN_SRC console
+  $ cat ~/.ssh/id_ed25519.pub \
+    | ssh ${target_username}@${target_ip} "cat >> /home/${target_username}/.ssh/authorized_keys"
+#+END_SRC
+
+Then, check if the =authorized_keys= file contains only the credentials that meant to be there.
+
+#+BEGIN_SRC console
+  user@192.168.43.10:~$ cat ~/.ssh/authorized_keys
+  ssh-ed25519 f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2 user@domain.com
+#+END_SRC
